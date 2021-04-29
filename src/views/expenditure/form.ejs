@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <label>User</label>
+      <select class="form-control" name="user_id" class="form-control" required>
+        <option value="" selected disabled>USER</option>
+        <% findUser.map((val)=> { const user = value.user === val.id ?
+        "selected" : ""%>
+        <option value="<%=val.id%>" <%= user%>><%= val.name%></option>
+        <% }) %>
+      </select>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <div class="form-group">
+      <label>IDR</label>
+      <input
+        type="number"
+        name="idr"
+        class="form-control"
+        placeholder="IDR"
+        value="<%= value.idr%>"
+        required
+      />
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <div class="form-group">
+      <label>Date</label>
+      <input
+        type="date"
+        name="date"
+        class="form-control"
+        placeholder="Date Time"
+        value="<%= value.date%>"
+        required
+      />
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <div class="form-group">
+      <label>Note</label>
+      <input
+        class="form-control"
+        name="note"
+        rows="2"
+        placeholder="Note"
+        required
+        value="<%= value.note%>"
+      />
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <div class="form-group">
+      <label>Image</label>
+      <input
+        type="file"
+        name="image"
+        class="form-control"
+        placeholder="Image"
+        value="<%= value.image%>"
+      />
+    </div>
+  </div>
+</div>
