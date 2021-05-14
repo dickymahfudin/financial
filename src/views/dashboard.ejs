@@ -1,3 +1,12 @@
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css"
+  rel="stylesheet"
+/>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
   <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
 </div>
@@ -95,6 +104,14 @@
   </div>
 </div>
 
+<div class="form-inline">
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="inputPassword2" class="sr-only">Password</label>
+    <input type="text" name="datepicker" class="form-control" id="datepicker" />
+  </div>
+  <button id="confirm" class="btn btn-primary mb-2">Confirm</button>
+</div>
+
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <h4>Users Already paid <%=data.date%></h4>
@@ -119,5 +136,93 @@
     const toastError = '<%= toastError %>';
     toastSuccess != '' && notification('success', toastSuccess);
     toastError != '' && notification('error', toastError);
+    $('#datepicker').datepicker({
+      format: 'mm-yyyy',
+      startView: 'months',
+      minViewMode: 'months',
+    });
+    $('#confirm').click(function (e) {
+      e.preventDefault();
+      const date = $('#datepicker').val();
+      console.log(date);
+
+      // $('#dataTable').html(`
+      //               <table class="table table-striped table-bordered dt-responsive nowrap" style="width:100%" id="tablesla">
+      //                   <thead>
+      //                       <tr>
+      //                           <th scope="col">no</th>
+      //                           <th scope="col">user</th>
+
+      //                       </tr>
+      //                   </thead>
+      //                   <tbody>
+      //                   </tbody>
+      //               </table>`);
+
+      $('#dataTable').DataTable({
+        // rowReorder: {
+        //   selector: 'td:nth-child(2)',
+        // },
+        // processing: true,
+        retrieve: true,
+        responsive: true,
+        dom: 'Blrtip',
+        ajax: {
+          // type: 'GET',
+          url: 'http://localhost:5000/dashboard/table',
+          data: { date },
+          success: function (json) {
+            console.log(json);
+            return json;
+          },
+        },
+        columns: [{ data: 'no' }, { data: 'user' }],
+      });
+      //   $.ajax({
+      //     type: 'GET',
+      //     url: '/dashboard/table',
+      //     data: { date },
+      //     dataType: 'json',
+      //     success: function (response) {
+      //       console.log(response);
+      //       let findImage = response.columns.findIndex((e) => e.data === 'image');
+      //       response.columns[findImage] = {
+      //         data: 'image',
+      //         title: 'IMAGE',
+      //         searchable: false,
+      //         sortable: false,
+      //         render: function (data, type, full, meta) {
+      //           return `<a href="${data}" data-toggle="lightbox" data-max-width="600"> <img src="${data}" class="img-fluid" alt="images"/><a/>`;
+      //         },
+      //       };
+      //       $('#dataTable').html(`
+      //                 <table class="table table-striped table-bordered dt-responsive nowrap" style="width:100%" id="tablesla">
+      //                     <thead>
+      //                         <tr>
+      //                             <th scope="col">no</th>
+      //                             <th scope="col">user</th>
+
+      //                         </tr>
+      //                     </thead>
+      //                     <tbody>
+      //                     </tbody>
+      //                 </table>`);
+
+      //       $('#dataTable').DataTable({
+      //         rowReorder: {
+      //           selector: 'td:nth-child(2)',
+      //         },
+      //         serverSide: true,
+      //         // processing: true,
+      //         retrieve: true,
+      //         responsive: true,
+      //         dom: 'Blrtip',
+      //         data: response.data,
+      //         columns: [{ data: 'no' }, { data: 'user' }],
+      //       });
+      //       // $('#dataTable').DataTable().ajax.reload();
+      //     },
+      //   });
+    });
   });
 </script>

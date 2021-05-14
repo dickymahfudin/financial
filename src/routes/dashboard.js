@@ -36,6 +36,18 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/table', async (req, res, next) => {
+  const { date } = req.query;
+  console.log(date);
+  let between = [moment().startOf('month'), moment().endOf('month')];
+  if (date) {
+    const temp = date.split('-');
+    temp.splice(1, 0, '01');
+    const formatDate = new Date(temp.join('-'));
+    between = [
+      moment(formatDate).startOf('month'),
+      moment(formatDate).endOf('month'),
+    ];
+  }
   const findIncome = await income.findAll({
     include: [
       {
@@ -48,7 +60,7 @@ router.get('/table', async (req, res, next) => {
     ],
     where: {
       createdAt: {
-        [Op.between]: [moment().startOf('month'), moment().endOf('month')],
+        [Op.between]: between,
       },
     },
     order: [['id', 'ASC']],

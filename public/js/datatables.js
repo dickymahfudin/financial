@@ -13,7 +13,7 @@ $(document).ready(function () {
         searchable: false,
         sortable: false,
         render: function (data, type, full, meta) {
-          return `<a href="${data}" data-toggle="lightbox" data-max-width="600"> <img src="${data}" class="img-fluid" alt="income"/><a/>`;
+          return `<a href="${data}" data-toggle="lightbox" data-max-width="600"> <img src="${data}" class="img-fluid" alt="${parsUrl}"/><a/>`;
         },
         mData: 'image',
         sTitle: 'IMAGE',

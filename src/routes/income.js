@@ -18,7 +18,15 @@ router.post('/', async (req, res, next) => {
   const date = new Date(req.body.date);
   const findIncome = await income.findAll({
     limit: 1,
-    where: { user_id },
+    where: {
+      user_id,
+      createdAt: {
+        [Op.between]: [
+          moment(date).startOf('month'),
+          moment(date).endOf('month'),
+        ],
+      },
+    },
     order: [['createdAt', 'DESC']],
   });
   if (findIncome.length > 0) {
