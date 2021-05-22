@@ -16,6 +16,12 @@ module.exports = {
       username: {
         type: Sequelize.STRING(30),
       },
+      phone: {
+        type: Sequelize.STRING(14),
+      },
+      email: {
+        type: Sequelize.STRING(50),
+      },
       password: {
         type: Sequelize.STRING,
       },
@@ -36,12 +42,14 @@ module.exports = {
       { name: admin, username: 'admin', password, createdAt, updatedAt },
       { name: 'Agisna Gusti Ainun', createdAt, updatedAt },
       { name: 'Fadil Gunawan', createdAt, updatedAt },
+      { name: 'Firdaus Alfidai', createdAt, updatedAt },
       { name: 'Hadyan Adam Hermana', createdAt, updatedAt },
       { name: 'Ilham Tajudin', createdAt, updatedAt },
       { name: 'Maulana Malik Ibrahim', createdAt, updatedAt },
-      { name: 'M Fahmi Maulana', createdAt, updatedAt },
-      { name: 'M Dicky Mahfudin', createdAt, updatedAt },
-      { name: 'pungki', createdAt, updatedAt },
+      { name: 'Muhammad Dicky Mahfudin', createdAt, updatedAt },
+      { name: 'Muhammad Fahmi Maulana', createdAt, updatedAt },
+      { name: 'Muhammad Fachrizal', createdAt, updatedAt },
+      { name: 'Pungki Ardiansyah', createdAt, updatedAt },
     ]);
   },
   down: async (queryInterface, Sequelize) => {

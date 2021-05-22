@@ -10,23 +10,23 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-  const { name } = req.body;
+  const { name, phone, email } = req.body;
   const findName = await user.findOne({ where: { name } });
   if (findName) {
     req.flash('error', 'Name Already Exist');
     return res.redirect('/user');
   }
-  await user.create({ name });
+  await user.create({ name, phone, email });
   req.flash('success', 'Data Added Successfully');
   return res.redirect('/user');
 });
 
 router.post('/:id', async (req, res, next) => {
-  const { name } = req.body;
+  const { name, phone, email } = req.body;
   const id = req.params.id;
   console.log(name);
   const tempName = await user.findByPk(id);
-  await tempName.update({ name });
+  await tempName.update({ name, phone, email });
   req.flash('success', 'Data Edit Successfully');
   return res.redirect('/user');
 });
