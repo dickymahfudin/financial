@@ -5,8 +5,6 @@ const { user, expenditure } = require('../models');
 const { Op } = require('sequelize');
 const moment = require('moment');
 const idrFormat = require('../helpers/idrFormat');
-const { BASE_URL, PORT } = process.env;
-const url = `http://${BASE_URL}:${PORT}`;
 
 router.get('/', async (req, res, next) => {
   const { username } = req.session;
@@ -17,7 +15,7 @@ router.post('/', async (req, res, next) => {
   const { user_id, idr, note } = req.body;
   const date = new Date(req.body.date);
 
-  const image = req.file && `${url}/upload/${req.file.filename}`;
+  const image = req.file && `/upload/${req.file.filename}`;
   await expenditure.create({
     user_id,
     idr,
@@ -35,7 +33,7 @@ router.post('/:id', async (req, res, next) => {
   const date = new Date(req.body.date);
   const id = req.params.id;
   const tempexpenditure = await expenditure.findByPk(id);
-  const image = req.file && `${url}/upload/${req.file.filename}`;
+  const image = req.file && `/upload/${req.file.filename}`;
   await tempexpenditure.update({
     user_id,
     idr,

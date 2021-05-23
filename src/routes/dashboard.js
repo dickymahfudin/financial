@@ -5,8 +5,6 @@ const { user, income, expenditure } = require('../models');
 const { Op } = require('sequelize');
 const moment = require('moment');
 const idrFormat = require('../helpers/idrFormat');
-const { BASE_URL, PORT } = process.env;
-const url = `http://${BASE_URL}:${PORT}`;
 
 const sum = (arr, param) =>
   arr.map((val) => val[param]).reduce((acc, val) => +(acc + val).toFixed(3));

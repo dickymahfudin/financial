@@ -5,8 +5,6 @@ const { user, income } = require('../models');
 const { Op } = require('sequelize');
 const moment = require('moment');
 const idrFormat = require('../helpers/idrFormat');
-const { BASE_URL, PORT } = process.env;
-const url = `http://${BASE_URL}:${PORT}`;
 
 router.get('/', async (req, res, next) => {
   const { username } = req.session;
@@ -37,7 +35,7 @@ router.post('/', async (req, res, next) => {
       return res.redirect('/income');
     }
   }
-  const image = req.file && `${url}/upload/${req.file.filename}`;
+  const image = req.file && `/upload/${req.file.filename}`;
   await income.create({
     user_id,
     idr,
@@ -55,7 +53,7 @@ router.post('/:id', async (req, res, next) => {
   console.log(date);
   const id = req.params.id;
   const tempIncome = await income.findByPk(id);
-  const image = req.file && `${url}/upload/${req.file.filename}`;
+  const image = req.file && `/upload/${req.file.filename}`;
   await tempIncome.update({
     user_id,
     idr,
