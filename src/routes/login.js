@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { user } = require('../models');
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 router.get('/', (req, res, next) => {
   res.render('login', { title: 'Login', layout: 'layouts/blank' });
